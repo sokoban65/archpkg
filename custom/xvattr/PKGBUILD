@@ -1,0 +1,20 @@
+pkgname=xvattr
+pkgver=1.3
+pkgrel=1
+arch=('i686' 'x86_64')
+license=('GPL')
+pkgdesc="Adjust attributes associated with the Xv extension to Xorg (no GTK)"
+depends=('libxv')
+source=(http://www.dtek.chalmers.se/~dvd/dist/${pkgname}-${pkgver}.tar.gz
+        xvattr-1.3-gtk.patch)
+url="http://www.dtek.chalmers.se/~dvd/"
+md5sums=('041e0d1f2ebce216e69e08ce78ec2ceb'
+         'a47ed878903f3e104b3ca10fdf2434d4')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  patch -Np1 -i ../xvattr-1.3-gtk.patch || return 1
+  ./configure --prefix=/usr --mandir=/usr/share/man --without-gtk || return 1
+  make || return 1
+  make DESTDIR="${pkgdir}" install || return 1
+}
