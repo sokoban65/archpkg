@@ -1,0 +1,18 @@
+# vim: set ft=sh:
+
+install ()
+{
+    MODULES=""
+    BINARIES=""
+    FILES=""
+    SCRIPT="backlight"
+
+    add_file "/sbin/backlight" "/bin/backlight"
+}
+
+help ()
+{
+cat<<HELPEOF
+  This hook set the backlight level on an imac. Use backlight=<0-15> to overridethe default of 3.
+HELPEOF
+}

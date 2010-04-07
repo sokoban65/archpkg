@@ -1,0 +1,27 @@
+pkgname=backlight
+pkgver=1.0
+pkgrel=1
+pkgdesc="Backlight Utility for Apple MacBook Pro and Apple iMac with ATI Radeon X1600 Graphic Adapter"
+url=""
+license="GPL"
+arch=('i686' 'x86_64')
+depends=()
+makedepends=()
+conflicts=()
+replaces=()
+backup=()
+install=
+source=(Makefile backlight.c backlight-install backlight-hook)
+
+build() {
+  cd $srcdir
+  make || return 1
+  install -m 4755 -D backlight         $pkgdir/sbin/backlight
+  install -m 0644 -D backlight-install $pkgdir/lib/initcpio/install/backlight
+  install -m 0644 -D backlight-hook    $pkgdir/lib/initcpio/hooks/backlight
+}
+
+md5sums=('2aa73791e557934b7166f5cd7bfe4bf2'
+         '7003a03f52a555d7ecd2103fd1d484a4'
+         '883b7d6c299bee9c3d4e15ef5a107971'
+         'd3596fb0e8317e78ec87ac2d912f906b')

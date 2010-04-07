@@ -1,0 +1,5 @@
+# vim: set ft=sh:
+run_hook ()
+{
+    /bin/backlight "${backlight:-3}" > /dev/null
+}
